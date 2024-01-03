@@ -1,0 +1,43 @@
+import random
+import datetime
+import time
+
+def generate_air_compressor_data():
+    timestamp = datetime.datetime.now()
+    pressure = round(random.uniform(100, 150), 2)  # Simulated pressure in PSI
+    temperature = round(random.uniform(50, 100), 2)  # Simulated temperature in Fahrenheit
+    airflow = round(random.uniform(500, 1000), 2)  # Simulated airflow in CFM (cubic feet per minute)
+    power_consumption = round(random.uniform(10, 50), 2)  # Simulated power consumption in kW
+
+    record = {
+        "Timestamp": timestamp,
+        "Pressure_PSI": pressure,
+        "Temperature_F": temperature,
+        "Airflow_CFM": airflow,
+        "Power_kW": power_consumption
+    }
+    return record
+
+def save_data(data, saving_rate):
+    # Simulating saving data at a specified rate (e.g., every 'saving_rate' seconds)
+    while True:
+        print("Saving data:", data)  # Replace this with your data saving logic
+        time.sleep(saving_rate)
+
+# Generate and save data at specific intervals
+sampling_interval = 5  # Interval for generating new data (seconds)
+saving_interval = 20  # Interval for saving data (seconds)
+
+try:
+    while True:
+        # Generate new data
+        new_data = generate_air_compressor_data()
+        print("Generated data:", new_data)  # Replace this with your data handling logic
+
+        # Save data at the specified saving interval
+        save_data(new_data, saving_interval)
+        
+        # Wait for the next data generation interval
+        time.sleep(sampling_interval)
+except KeyboardInterrupt:
+    print("Process interrupted.")
